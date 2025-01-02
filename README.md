@@ -22,3 +22,9 @@ Dataset obsahuje sedem hlavných tabuliek:
 
 ### **ERD diagram**
 Surové dáta sú usporiadané v relačnom modeli, ktorý je znázornený na **entitno-relačnom diagrame (ERD)**:
+
+<p align="center">
+  <img src="https://github.com/ErikSkultetyUKF/DT-MovieLens-ETL/blob/main/movielens_erd_schema.png" alt="ERD Schema">
+  <br>
+  <em>Obrázok 1 Entitno-relačná schéma MovieLens</em>
+</p>
