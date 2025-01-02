@@ -35,7 +35,7 @@ Surové dáta sú usporiadané v relačnom modeli, ktorý je znázornený na **e
 ## **2 Dimenzionálny model**
 
 Navrhnutý bol **hviezdicový model (star schema)**, pre efektívnu analýzu kde centrálny bod predstavuje faktová tabuľka **`fact_ratings`**, ktorá je prepojená s nasledujúcimi dimenziami:
-- **`dim_movies`**: Obsahuje podrobné informácie o knihách (názov, rok vydania).
+- **`dim_movies`**: Obsahuje podrobné informácie o filmoch (názov, rok vydania).
 - **`dim_users`**: Obsahuje demografické údaje o používateľoch, ako sú vek, vekové kategórie, pohlavie, PSČ a povolanie.
 - **`dim_tags`**: Obsahuje podrobné informácie o tag-och (tagy, dátum a čas vytvorenia).
 - **`dim_genres`**: Obsahuje názvy pre kategórie filmov (žánre).
