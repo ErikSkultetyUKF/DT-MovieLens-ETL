@@ -233,3 +233,6 @@ DROP TABLE IF EXISTS tags_staging;
 ```
 
 ETL proces v Snowflake umožnil spracovanie pôvodných dát z `.csv` formátu do viacdimenzionálneho modelu typu hviezda. Tento proces zahŕňal čistenie, obohacovanie a reorganizáciu údajov. Výsledný model umožňuje analýzu čitateľských preferencií a správania používateľov, pričom poskytuje základ pre vizualizácie a reporty.
+
+---
+**Autor:** Erik Škultéty
