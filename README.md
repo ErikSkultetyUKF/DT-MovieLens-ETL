@@ -215,3 +215,21 @@ JOIN dim_time dtime
     AND EXTRACT(SECOND FROM r.rated_at) = dtime.second
 JOIN dim_date ddate ON CAST(r.rated_at AS DATE) = ddate.date;
 ```
+
+---
+### **3.3 Load (Načítanie dát)**
+
+Po úspešnom vytvorení dimenzií a faktovej tabuľky boli dáta nahraté do finálnej štruktúry. Na záver boli staging tabuľky odstránené, aby sa optimalizovalo využitie úložiska:
+
+```sql
+DROP TABLE IF EXISTS occupations_staging;
+DROP TABLE IF EXISTS age_group_staging;
+DROP TABLE IF EXISTS users_staging;
+DROP TABLE IF EXISTS movies_staging;
+DROP TABLE IF EXISTS genres_staging;
+DROP TABLE IF EXISTS genres_movies_staging;
+DROP TABLE IF EXISTS ratings_staging;
+DROP TABLE IF EXISTS tags_staging;
+```
+
+ETL proces v Snowflake umožnil spracovanie pôvodných dát z `.csv` formátu do viacdimenzionálneho modelu typu hviezda. Tento proces zahŕňal čistenie, obohacovanie a reorganizáciu údajov. Výsledný model umožňuje analýzu čitateľských preferencií a správania používateľov, pričom poskytuje základ pre vizualizácie a reporty.
