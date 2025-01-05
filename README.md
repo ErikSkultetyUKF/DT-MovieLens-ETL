@@ -235,7 +235,7 @@ DROP TABLE IF EXISTS tags_staging;
 ETL proces v Snowflake umožnil spracovanie pôvodných dát z `.csv` formátu do viacdimenzionálneho modelu typu hviezda. Tento proces zahŕňal čistenie, obohacovanie a reorganizáciu údajov. Výsledný model umožňuje analýzu čitateľských preferencií a správania používateľov, pričom poskytuje základ pre vizualizácie a reporty.
 
 ---
-## **4 Vizualizácia 
+## **4 Vizualizácia**
 
 Dashboard obsahuje `5 vizualizácií`, ktoré poskytujú základný prehľad o kľúčových metrikách a trendoch týkajúcich sa kníh, používateľov a hodnotení. Tieto vizualizácie odpovedajú na dôležité otázky a umožňujú lepšie pochopiť správanie používateľov a ich preferencie.
 
@@ -246,7 +246,7 @@ Dashboard obsahuje `5 vizualizácií`, ktoré poskytujú základný prehľad o k
 </p>
 
 ---
-### **Graf 1: Top 10 filmov podľa počtu hodnotení
+### **Graf 1: Top 10 filmov podľa počtu hodnotení**
 Táto vizualizácia zobrazuje 10 filmov s najväčším počtom hodnotení. Umožňuje identifikovať najpopulárnejšie filmy medzi používateľmi.
 
 ```sql
@@ -261,7 +261,7 @@ LIMIT 10;
 ```
 
 ---
-### **Graf 2: Top 10 žánrov filmov s najväčším počtom hodnotení
+### **Graf 2: Top 10 žánrov filmov s najväčším počtom hodnotení**
 Tento graf zobrazuje 10 žánrov filmov s najväčším počtom hodnotení. Umožňuje identifikovať najpopulárnejšie žánre filmov medzi používateľmi.
 
 ```sql
@@ -276,7 +276,7 @@ LIMIT 10;
 ```
 
 ---
-### **Graf 3: Top 20 rokov vydania filmov s najväčším hodnotením
+### **Graf 3: Top 20 rokov vydania filmov s najväčším hodnotením**
 Táto vizualizácia ukatzuje 20 rokov vydania filmov filmov s najväčším hodnotením. Umožňuje identifikovať najpopulárnejšie roky vydania filmov medzi používateľmi.
 
 ```sql
@@ -291,7 +291,7 @@ LIMIT 20;
 ```
 
 ---
-### **Graf 4: Top 5 najčasteších hodín hodnotenia užívateľmi
+### **Graf 4: Top 5 najčasteších hodín hodnotenia užívateľmi**
 Tento graf ukazuje časový údaj (`hodiny`). Umožňuje identifikovať hodiny, v ktorých používatelia najčastejšie hodnotili filmy.
 
 ```sql
@@ -306,7 +306,7 @@ LIMIT 5;
 ```
 
 ---
-### **Graf 5: Počet hodnotení podľa vekovej kategórie
+### **Graf 5: Počet hodnotení podľa vekovej kategórie**
 Tento graf vizualizuje vekovú kategóriu. Umožňuje identifikovať vekové kategórie používateľov, ktoré najviac hodnotia filmy.
 
 ```sql
