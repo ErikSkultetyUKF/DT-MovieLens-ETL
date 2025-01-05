@@ -235,4 +235,91 @@ DROP TABLE IF EXISTS tags_staging;
 ETL proces v Snowflake umožnil spracovanie pôvodných dát z `.csv` formátu do viacdimenzionálneho modelu typu hviezda. Tento proces zahŕňal čistenie, obohacovanie a reorganizáciu údajov. Výsledný model umožňuje analýzu čitateľských preferencií a správania používateľov, pričom poskytuje základ pre vizualizácie a reporty.
 
 ---
+## **4 Vizualizácia 
+
+Dashboard obsahuje `5 vizualizácií`, ktoré poskytujú základný prehľad o kľúčových metrikách a trendoch týkajúcich sa kníh, používateľov a hodnotení. Tieto vizualizácie odpovedajú na dôležité otázky a umožňujú lepšie pochopiť správanie používateľov a ich preferencie.
+
+<p align="center">
+  <img src="https://github.com/ErikSkultetyUKF/DT-MovieLens-ETL/blob/main/movielens_dashboard.png" alt="Star Schema">
+  <br>
+  <em>Obrázok 3 Dashboard MovieLens Datasetu</em>
+</p>
+
+---
+### **Graf 1: Top 10 filmov podľa počtu hodnotení
+Táto vizualizácia zobrazuje 10 filmov s najväčším počtom hodnotení. Umožňuje identifikovať najpopulárnejšie filmy medzi používateľmi.
+
+```sql
+SELECT 
+    m.title,
+    COUNT(fact_ratings.ID) AS total_ratings
+FROM fact_ratings
+JOIN dim_movies m ON m.ID = fact_ratings.dim_movies_ID
+GROUP BY m.title
+ORDER BY total_ratings DESC
+LIMIT 10;
+```
+
+---
+### **Graf 2: Top 10 žánrov filmov s najväčším počtom hodnotení
+Tento graf zobrazuje 10 žánrov filmov s najväčším počtom hodnotení. Umožňuje identifikovať najpopulárnejšie žánre filmov medzi používateľmi.
+
+```sql
+SELECT 
+    g.name,
+    COUNT(fact_ratings.ID) AS total_ratings
+FROM fact_ratings
+JOIN dim_genres g ON g.ID = fact_ratings.dim_genres_ID
+GROUP BY g.name
+ORDER BY total_ratings DESC
+LIMIT 10;
+```
+
+---
+### **Graf 3: Top 20 rokov vydania filmov s najväčším hodnotením
+Táto vizualizácia ukatzuje 20 rokov vydania filmov filmov s najväčším hodnotením. Umožňuje identifikovať najpopulárnejšie roky vydania filmov medzi používateľmi.
+
+```sql
+SELECT
+    m.release_year,
+    SUM(fact_ratings.ID) AS total_ratings
+FROM fact_ratings
+JOIN dim_movies m ON m.ID = fact_ratings.dim_movies_ID
+GROUP BY m.release_year
+ORDER BY total_ratings DESC
+LIMIT 20;
+```
+
+---
+### **Graf 4: Top 5 najčasteších hodín hodnotenia užívateľmi
+Tento graf ukazuje časový údaj (`hodiny`). Umožňuje identifikovať hodiny, v ktorých používatelia najčastejšie hodnotili filmy.
+
+```sql
+SELECT
+    tm.hour,
+    COUNT(fact_ratings.ID) AS total_ratings
+FROM fact_ratings
+JOIN dim_time tm ON tm.ID = fact_ratings.dim_time_ID
+GROUP BY tm.hour
+ORDER BY total_ratings DESC
+LIMIT 5;
+```
+
+---
+### **Graf 5: Počet hodnotení podľa vekovej kategórie
+Tento graf vizualizuje vekovú kategóriu. Umožňuje identifikovať vekové kategórie používateľov, ktoré najviac hodnotia filmy.
+
+```sql
+SELECT 
+    u.age_group_name,
+    COUNT(fact_ratings.ID) AS total_ratings
+FROM fact_ratings
+JOIN dim_users u ON u.ID = fact_ratings.dim_users_ID
+GROUP BY u.age_group_name
+ORDER BY total_ratings DESC;
+```
+
+Dashboard poskytuje komplexný pohľad na dáta, pričom zodpovedá dôležité otázky týkajúce sa sledovateľských preferencií a správania používateľov. Vizualizácie umožňujú jednoduchú interpretáciu dát a môžu byť využité na optimalizáciu odporúčacích systémov, marketingových stratégií a filmových služieb.
+
+---
 **Autor:** Erik Škultéty
