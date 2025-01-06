@@ -107,9 +107,9 @@ Dimenzia `dim_tags` obsahuje údaje o čase vrátane názvu.
 CREATE OR REPLACE TABLE dim_tags AS
 SELECT
     ROW_NUMBER() OVER (ORDER BY tags) AS ID,
-    tags
-FROM tags_staging
-GROUP BY tags;
+    tags,
+    created_at
+FROM tags_staging;
 ```
 
 Dimenzia `dim_time` obsahuje údaje o čase vrátane hodiny, minúty a sekundy.

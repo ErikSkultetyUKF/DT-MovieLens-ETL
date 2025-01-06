@@ -1,11 +1,9 @@
 -- Vytvorenie databázy
 CREATE OR REPLACE DATABASE SPARROW_MovieLens;
-
 USE DATABASE SPARROW_MovieLens;
 
 -- Vytvorenie schémy pre staging tabuľky
 CREATE OR REPLACE SCHEMA SPARROW_MovieLens.staging;
-
 USE SCHEMA SPARROW_MovieLens.staging;
 
 CREATE OR REPLACE STAGE SPARROW_MovieLens_Stage;
@@ -139,9 +137,9 @@ ON_ERROR = 'CONTINUE';
 CREATE OR REPLACE TABLE dim_tags AS
 SELECT
     ROW_NUMBER() OVER (ORDER BY tags) AS ID,
-    tags
+    tags,
+    created_at
 FROM tags_staging
-GROUP BY tags;
 
 -- Vytvorenie tabuľky time (dimenzia)
 CREATE OR REPLACE TABLE dim_time AS
