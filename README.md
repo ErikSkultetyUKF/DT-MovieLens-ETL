@@ -1,6 +1,6 @@
 # **ETL proces datasetu MovieLens**
 
-Tento repozitár obsahuje implementáciu ETL procesu v Snowflake pre analýzu dát z **MovieLens** datasetu. Projekt sa zameriava na preskúmanie správania používateľov a ich čitateľských preferencií na základe hodnotení kníh a demografických údajov používateľov. Výsledný dátový model umožňuje multidimenzionálnu analýzu a vizualizáciu kľúčových metrik.
+Tento repozitár obsahuje implementáciu ETL procesu v Snowflake pre analýzu dát z **MovieLens** datasetu. Projekt sa zameriava na preskúmanie správania používateľov a ich sledovateľských preferencií na základe hodnotení filmov a demografických údajov používateľov. Výsledný dátový model umožňuje multidimenzionálnu analýzu a vizualizáciu kľúčových metrik.
 
 ---
 ## **1. Úvod a popis zdrojových dát**
@@ -99,9 +99,9 @@ V prípade nekonzistentných záznamov bol použitý parameter `ON_ERROR = 'CONT
 
 V tejto fáze boli dáta zo staging tabuliek vyčistené, transformované a obohatené. Hlavným cieľom bolo pripraviť dimenzie a faktovú tabuľku, ktoré umožnia jednoduchú a efektívnu analýzu.
 
-Dimenzie boli navrhnuté na poskytovanie kontextu pre faktovú tabuľku.
+**Dimenzie boli navrhnuté na poskytovanie kontextu pre faktovú tabuľku.**
 
-Dimenzia `dim_tags` obsahuje údaje o čase vrátane názvu.
+Dimenzia `dim_tags` obsahuje údaje o čase vrátane názvu a dátumu vytvorenia.
 
 ```sql
 CREATE OR REPLACE TABLE dim_tags AS
@@ -149,18 +149,18 @@ FROM (
 Dimenzia `dim_movies` obsahuje údaje o filmoch vrátane názvu.
 
 ```sql
-CREATE OR REPLACE  TABLE dim_movies AS
+CREATE OR REPLACE TABLE dim_movies AS
 SELECT
     ROW_NUMBER() OVER (ORDER BY title) AS ID,
-    title
-FROM movies_staging
-GROUP BY title;
+    title,
+    release_year
+FROM movies_staging;
 ```
 
 Dimenzia `dim_genres` obsahuje údaje o žánroch vrátane názvu.
 
 ```sql
-CREATE OR REPLACE  TABLE dim_genres AS
+CREATE OR REPLACE TABLE dim_genres AS
 SELECT
     ROW_NUMBER() OVER (ORDER BY name) AS ID,
     name
@@ -171,7 +171,7 @@ GROUP BY name;
 Dimenzia `dim_users` obsahuje údaje o používateľoch vrátane vekových kategórií, pohlavia a zamestnania.
 
 ```sql
-CREATE OR REPLACE  TABLE dim_users AS
+CREATE OR REPLACE TABLE dim_users AS
 SELECT
     u.userId AS ID,
     CASE 
@@ -237,7 +237,7 @@ ETL proces v Snowflake umožnil spracovanie pôvodných dát z `.csv` formátu d
 ---
 ## **4 Vizualizácia**
 
-Dashboard obsahuje `5 vizualizácií`, ktoré poskytujú základný prehľad o kľúčových metrikách a trendoch týkajúcich sa kníh, používateľov a hodnotení. Tieto vizualizácie odpovedajú na dôležité otázky a umožňujú lepšie pochopiť správanie používateľov a ich preferencie.
+Dashboard obsahuje `5 vizualizácií`, ktoré poskytujú základný prehľad o kľúčových metrikách a trendoch týkajúcich sa filmov, používateľov a hodnotení. Tieto vizualizácie odpovedajú na dôležité otázky a umožňujú lepšie pochopiť správanie používateľov a ich preferencie.
 
 <p align="center">
   <img src="https://github.com/ErikSkultetyUKF/DT-MovieLens-ETL/blob/main/movielens_dashboard.png" alt="Star Schema">
